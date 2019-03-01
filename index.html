@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vegan-Friendly PHL - Restaurant Finder</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Vegan-Friendly PHL</h1>
+        <p>The Philadelphia Area Restaurant Finder for Herbivores & Friends</p>
+    </header>
+    <section class="search">
+        <form id="searchOptions">
+            <div class="searchCat">
+                <label>Veg-Friendliness</label>
+                    <select name="vegness" multiple="" size="3" id="js-veg-level">
+                        <option value="5">100% Vegan</option>
+                        <option value="4">100% Vegetarian + Vegan Friendly</option>
+                        <option value="2">Non-Veg + Vegan Friendly</option>
+                    </select>
+            </div>
+
+            <div class="searchCat">
+                <label>Address (for closest proximity)</label>
+                <input type="text" name="address" id="js-address" placeholder="123 Main St." autocomplete="on">
+                <label>OR Select Neighborhoods</label>
+                    <select name="neighborhoods" multiple="" id="js-neighborhoods">
+                        <option value="Art Museum Area">Art Museum</option>
+                        <option value="Callowhill">Callowhill</option>
+                        <option value="Center City East">Center City - East</option>
+                        <option value="Center City West">Center City - West</option>
+                        <option value="Center City South">Center City - South</option>
+                        <option value="Doylestown">Doylestown</option>
+                        <option value="East Falls">East Falls</option>
+                        <option value="East Passyunk">East Passyunk</option>
+                        <option value="Germantown">Germantown</option>
+                        <option value="Italian Market">Italian Market</option>
+                        <option value="Manayunk">Manayunk</option>
+                        <option value="Mt. Airy">Mt. Airy</option>
+                        <option value="Newbold">Newbold</option>
+                        <option value="Northern Liberties">Northern Liberties</option>
+                        <option value="Pennsport">Pennsport</option>
+                        <option value="Point Breeze">Point Breeze</option>
+                        <option value="Queen Village">Queen Village</option>
+                        <option value="Rittenhouse Square">Rittenhouse</option>
+                        <option value="Society Hill">Society Hill</option>
+                        <option value="Suburbs - west">Suburbs - West</option>
+                        <option value="Suburbs - southwest">Suburbs - Southwest</option>
+                        <option value="University City">University City</option>
+                        <option value="West Philadelphia">West Philadelphia</option>
+                    </select>   
+            </div>
+
+            <div class="searchCat">
+                <label>Food Types</label>
+                <select name="foodTypes" multiple="" id="js-food-types">
+                        <option value="1">American</option>
+                        <option value="23">Middle Eastern</option>
+                        <option value="43">Ethiopian</option>
+                        <option value="3">Chinese</option>
+                        <option value="10">Indian</option>
+                        <option value="19">Japanese</option>
+                        <option value="34">Thai</option>
+                        <option value="59">Pizza</option>
+                        <option value="16">Italian</option>
+                        <option value="66">Mediterranean</option>
+                        <option value="14">Mexican</option>
+                    </select>
+            </div>
+
+            <div class="searchCat">
+                <label>Other Options</label>
+                <select name="otherOptions" multiple="" id="js-other-options">
+                    <option value="3" class="js-attributes">Delivery Available</option>
+                    <option value="18" class="js-attributes">Gluten Free Options</option>
+                    <option value="true" id="js-wheelchair">Wheelchair Accessible</option>
+                    <option value="4" class="js-attributes">Kid-Friendly</option>
+                    <option value="true" id="js-accepts-res">Takes Reservations</option>
+            </select>
+                
+            </div>
+            <input type="submit" value="Find Restaurants">
+        </form>
+        <p id="js-error-message" class="error-message"></p>
+    </section>
+
+    <section id="results" class="hidden">
+            <h2>Search results</h2>
+            <ul id="results-list"></ul>
+    </section>
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

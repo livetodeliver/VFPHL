@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+  }
+
+  input, label {
+    display: block;
+}
+
+input {
+    margin: 0 auto;
+}
+
+select, input {
+    width: 300px;
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+  }
