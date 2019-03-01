@@ -24,9 +24,12 @@
 
             <div class="searchCat">
                 <label>Address (for closest proximity)</label>
-                <input type="text" name="address" id="js-address" placeholder="123 Main St." autocomplete="on">
+                <input type="text" name="address" class="js-address" placeholder="123 Main St." autocomplete="on">
+            </div>
+            <div class="searcCat"></div>
                 <label>OR Select Neighborhoods</label>
                     <select name="neighborhoods" multiple="" id="js-neighborhoods">
+                        <option class="js-address">Any</option>
                         <option value="Art Museum Area">Art Museum</option>
                         <option value="Callowhill">Callowhill</option>
                         <option value="Center City East">Center City - East</option>
@@ -72,13 +75,19 @@
 
             <div class="searchCat">
                 <label>Other Options</label>
-                <select name="otherOptions" multiple="" id="js-other-options">
-                    <option value="3" class="js-attributes">Delivery Available</option>
-                    <option value="18" class="js-attributes">Gluten Free Options</option>
-                    <option value="true" id="js-wheelchair">Wheelchair Accessible</option>
-                    <option value="4" class="js-attributes">Kid-Friendly</option>
-                    <option value="true" id="js-accepts-res">Takes Reservations</option>
+                <select name="otherOptions" multiple="" id="js-attributes">
+                    <option value="3">Delivery Available</option>
+                    <option value="18">Gluten Free Options</option>
+                    <option value="4">Kid-Friendly</option>
+                    
             </select>
+
+            <div class="searchCat">
+                <label>Wheelchair Accessible</label>
+                <input type="checkbox" checked="true" id="js-wheelchair">
+                <label>Accepts Reservations</label>
+                <input type="checkbox" checked="true" id="js-accepts-res">
+            </div>
                 
             </div>
             <input type="submit" value="Find Restaurants">

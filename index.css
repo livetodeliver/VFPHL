@@ -19,10 +19,14 @@ select, input {
     width: 300px;
 }
 
-div {
+.searchCat {
     margin-bottom: 20px;
 }
 
 .hidden {
     display: none;
   }
+
+/* .searchAdd {
+      display: none;
+  } */

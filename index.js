@@ -1,7 +1,7 @@
 'use strict';
 
 //const apiKey_vegguide = ''; 
-const searchURL_vegguide = 'https://www.vegguide.org//search/by-address/Philadelphia,+PA/filter/category_id=1;';
+const searchURL_vegguide = 'http://www.vegguide.org/search/';
 
 
 function formatQueryParams(params) {
@@ -30,12 +30,11 @@ function displayResults(responseJson) {
 
 function getRestaurants() {
     const vegLevel = $('#js-veg-level').val();
-    //const address = $('#js-address').val();
     const neighborhoods = $('#js-neighborhoods').val();
-    const foodTypes = $('#js-foodTypes').val();
+    const foodTypes = $('#js-food-types').val();
     const wheelchairAcc = $('#js-wheelchair').val();
     const accRes = $('#js-accepts-res').val();
-    const attr = $('.js-attributes').val();
+    const attr = $('#js-attributes').val();
   const params = {
     veg_level: vegLevel,
     accepts_reservations: accRes,
@@ -45,14 +44,15 @@ function getRestaurants() {
     attribute_id: attr,
   };
   const queryString = formatQueryParams(params)
-  const url = searchURL_vegguide + '?' + queryString;
-
+  let address = $('.js-address').val() + '+Philadelphia,+PA';
+  let location = 'by-address/' + address;
+  const url = searchURL_vegguide + location + '/filter/category_id=1;?' + queryString;
+  
   console.log(url);
 
   fetch(url, {
     headers: {
         'User-Agent': 'Vegan-Friendly PHL App v1.0',
-        'Access-Control-Allow-Origin': "*"
     }
 })
     .then(response => {
@@ -70,14 +70,7 @@ function getRestaurants() {
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
-    const vegLevel = $('#js-veg-level').val();
-    //const address = $('#js-address').val();
-    const neighborhoods = $('#js-neighborhoods').val();
-    const foodTypes = $('#js-foodTypes').val();
-    const wheelchairAcc = $('#js-wheelchair').val();
-    const accRes = $('#js-accepts-res').val();
-    const attr = $('.js-attributes').val();
-    getRestaurants(vegLevel, neighborhoods, foodTypes, wheelchairAcc, accRes, attr);
+    getRestaurants();
   });
 }
 
