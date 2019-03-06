@@ -1,7 +1,12 @@
 * {
     box-sizing: border-box;
   }
-  
+
+html, body {
+  height: 100;
+  margin: 0;
+  padding: 0;
+}
   body {
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -22,14 +27,22 @@ select, input {
 .searchCat {
     margin-bottom: 20px;
 }
+.mapContainer {
+  height: 400px;
+  width: 600px;
+  margin: 0 auto;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
 
 .hidden {
     display: none;
   }
 
-  #map {
-    height: 100%;
-  }
+
 
 /* .searchAdd {
       display: none;
