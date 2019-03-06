@@ -42,6 +42,33 @@ select, input {
     display: none;
   }
 
+#results-list {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.liRestaurantName, .liVeglev, .liNeighborhood, .liAddress, .liWebsite, .liDescription {
+  display: block;
+}
+
+.liRestaurantName {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.liDescription {
+  text-align: left;
+}
+
+.liVeglev {
+  font-style: italic;
+}
+
+li {
+  margin-bottom: 10px;
+  list-style: none;
+}
+
 
 
 /* .searchAdd {

@@ -21,20 +21,20 @@ function displayResults(responseJson) {
 
             let listItem = "";
 
-            listItem = `${responseJson.entries[i].name}
-    Veg-Friendliness: ${responseJson.entries[i].veg_level_description}`;
+            listItem = `<span class="liRestaurantName">${responseJson.entries[i].name}</span>
+    <span class="liVeglev">Veg-Friendliness: ${responseJson.entries[i].veg_level_description}</span>`;
 
             if (responseJson.entries[i].neighborhood) {
-                listItem = listItem + 'Neighborhood:' + responseJson.entries[i].neighborhood;
+                listItem = listItem + `<span class="liNeighborhoods">Neighborhood: ${responseJson.entries[i].neighborhood}</span>`;
             }
 
-            listItem = listItem + `${responseJson.entries[i].address1}`;
+            listItem = listItem + `<span class="liAddress">${responseJson.entries[i].address1}</span>`;
 
             if (responseJson.entries[i].website) {
-                listItem = listItem + `<a href='${responseJson.entries[i].website}'>${responseJson.entries[i].website}</a>`;
+                listItem = listItem + `<span class="liWebsite"><a href='${responseJson.entries[i].website}'>${responseJson.entries[i].website}</a><span>`;
             }
 
-            listItem = listItem + `${responseJson.entries[i].short_description}`;
+            listItem = listItem + `<span class="liDescription">${responseJson.entries[i].short_description}</span>`;
 
             $('#results-list').append(
                 `<li>${listItem}</li>`
