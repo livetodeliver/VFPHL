@@ -1,13 +1,13 @@
 'use strict';
 
-//const apiKey_vegguide = ''; 
-const searchURL_vegguide = 'http://www.vegguide.org/search/';
+
+const searchURL_vegguide = 'https://www.vegguide.org/search/';
 
 
 function formatQueryParams(params) {
   const queryItems = Object.keys(params)
-    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-  return queryItems.join('&');
+    .map(key => `${key}=${params[key]}`)
+  return queryItems.join(';');
 }
 
 function displayResults(responseJson) {
@@ -15,38 +15,78 @@ function displayResults(responseJson) {
   console.log(responseJson);
   $('#results-list').empty();
   // iterate through the items array
-  for (let i = 0; i < responseJson.data.length; i++){
- 
+  if (responseJson.entry_count !== 0) {
+
+  for (let i = 0; i < responseJson.entries.length; i++){
+
+    let listItem = "";
+
+    listItem = `${responseJson.entries[i].name}
+    Veg-Friendliness: ${responseJson.entries[i].veg_level_description}`;
+   
+    if (responseJson.entries[i].neighborhood) {
+        listItem = listItem + 'Neighborhood:' + responseJson.entries[i].neighborhood;
+    }
+
+    listItem = listItem + `${responseJson.entries[i].address1}`;
+
+    if (responseJson.entries[i].website) {
+        listItem = listItem + `<a href='${responseJson.entries[i].website}'>${responseJson.entries[i].website}</a>`;
+    }
+
+    listItem = listItem + `${responseJson.entries[i].short_description}`;
+
     $('#results-list').append(
-      `<li><h3>${responseJson.entries[i].name}</h3>
-      <li>${responseJson.entries[i].veg_level_description}</li>
-      <li>${responseJson.entries[i].address1}</li>
-      <li><a href='${responseJson.entries[i].website}'>${responseJson.entries[i].website}</a></li>
-      <li>${responseJson.entries[i].short_description}</li>` 
-    )};
-  //display the results section  
-  $('#results').removeClass('hidden');
+      `<li>${listItem}</li>` 
+    )
 };
 
-function getRestaurants() {
-    const vegLevel = $('#js-veg-level').val();
+  //display the results section  
+  
+
+} else {
+    $('#results-list').append(
+        `<li>No Results Found</li>` 
+    );
+}
+
+$('#results').removeClass('hidden');
+
+};
+
+function getRestaurants() {  
+  const params = {};
+  const addParam = (key, value) => {
+      if (value === true || value) {
+          params[key] = value;
+      }
+  }
+  
+    let vegLevel = $('#js-veg-level').val();
     const neighborhoods = $('#js-neighborhoods').val();
     const foodTypes = $('#js-food-types').val();
-    const wheelchairAcc = $('#js-wheelchair').val();
-    const accRes = $('#js-accepts-res').val();
     const attr = $('#js-attributes').val();
-  const params = {
-    veg_level: vegLevel,
-    accepts_reservations: accRes,
-    is_wheelchair_accessible: wheelchairAcc,
-    cuisines_id: foodTypes,
-    neighborhood: neighborhoods,
-    attribute_id: attr,
-  };
+
+    let wheelchairAcc = undefined;
+    if ($('#js-wheelchair').prop('checked')) {
+        wheelchairAcc = 1;
+    };
+    let accRes = undefined;
+    if ($('#js-accepts-res').prop('checked')) {
+        accRes = 1;
+    };
+
+        addParam('accepts_reservations', accRes);
+        addParam('is_wheelchair_accessible', wheelchairAcc);
+        addParam('cuisine_id', foodTypes.toString());
+        addParam('neighborhood', neighborhoods.toString());
+        addParam('attribute_id', attr.toString());
+  
+    
   const queryString = formatQueryParams(params)
   let address = $('.js-address').val() + '+Philadelphia,+PA';
   let location = 'by-address/' + address;
-  const url = searchURL_vegguide + location + '/filter/category_id=1;?' + queryString;
+  const url = searchURL_vegguide + location + '/filter/veg_level=' + vegLevel + ';category_id=1;' + queryString;
   
   console.log(url);
 
@@ -75,3 +115,6 @@ function watchForm() {
 }
 
 $(watchForm);
+
+
+

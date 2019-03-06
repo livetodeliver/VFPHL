@@ -15,7 +15,8 @@
         <form id="searchOptions">
             <div class="searchCat">
                 <label>Veg-Friendliness</label>
-                    <select name="vegness" multiple="" size="3" id="js-veg-level">
+                    <select name="vegness" multiple="" required size="4" id="js-veg-level">
+                        <option value="2">Any</option>
                         <option value="5">100% Vegan</option>
                         <option value="4">100% Vegetarian + Vegan Friendly</option>
                         <option value="2">Non-Veg + Vegan Friendly</option>
@@ -23,14 +24,15 @@
             </div>
 
             <div class="searchCat">
+        <!--- If an address is entered, then the param for "neighborhood" should mot be passed.-->
                 <label>Address (for closest proximity)</label>
                 <input type="text" name="address" class="js-address" placeholder="123 Main St." autocomplete="on">
             </div>
             <div class="searcCat"></div>
                 <label>OR Select Neighborhoods</label>
-                    <select name="neighborhoods" multiple="" id="js-neighborhoods">
-                        <option class="js-address">Any</option>
-                        <option value="Art Museum Area">Art Museum</option>
+                    <select name="neighborhoods" id="js-neighborhoods">
+                    <!--- If "Any" is selected then only Philadelphia, PA should be passed as the address. -->
+                        <option value="">Any</option>
                         <option value="Callowhill">Callowhill</option>
                         <option value="Center City East">Center City - East</option>
                         <option value="Center City West">Center City - West</option>
@@ -59,6 +61,7 @@
             <div class="searchCat">
                 <label>Food Types</label>
                 <select name="foodTypes" multiple="" id="js-food-types">
+                        <option value=''>Any</option>
                         <option value="1">American</option>
                         <option value="23">Middle Eastern</option>
                         <option value="43">Ethiopian</option>
@@ -79,23 +82,27 @@
                     <option value="3">Delivery Available</option>
                     <option value="18">Gluten Free Options</option>
                     <option value="4">Kid-Friendly</option>
-                    
-            </select>
+                    <option value="1">Brunch</option>
+                    <option value="16">Wi-Fi</option>
+                    <option value="18">Gluten-Free Options</option>
+            </div>        
+                </select>
 
-            <div class="searchCat">
+         <div class="searchCat">
                 <label>Wheelchair Accessible</label>
-                <input type="checkbox" checked="true" id="js-wheelchair">
+                <input name="wheelchairAcc" type="checkbox" id="js-wheelchair">
                 <label>Accepts Reservations</label>
-                <input type="checkbox" checked="true" id="js-accepts-res">
+                <input name="accRess" type="checkbox" name="accRes" id="js-accepts-res">
             </div>
                 
-            </div>
+            
             <input type="submit" value="Find Restaurants">
         </form>
         <p id="js-error-message" class="error-message"></p>
     </section>
 
     <section id="results" class="hidden">
+            <div id="map"></div>
             <h2>Search results</h2>
             <ul id="results-list"></ul>
     </section>

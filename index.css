@@ -27,6 +27,10 @@ select, input {
     display: none;
   }
 
+  #map {
+    height: 100%;
+  }
+
 /* .searchAdd {
       display: none;
   } */
