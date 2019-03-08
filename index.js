@@ -1,6 +1,5 @@
 'use strict';
 
-
 const searchURL_vegguide = 'https://www.vegguide.org/search/';
 
 
@@ -21,8 +20,9 @@ function displayResults(responseJson) {
 
             let listItem = "";
 
-            listItem = `<span class="liRestaurantName">${responseJson.entries[i].name}</span>
-    <span class="liVeglev">Veg-Friendliness: ${responseJson.entries[i].veg_level_description}</span>`;
+            listItem = `
+                <span class="liRestaurantName">${responseJson.entries[i].name}</span>
+                <span class="liVeglev">Veg-Friendliness: ${responseJson.entries[i].veg_level_description}</span>`;
 
             if (responseJson.entries[i].neighborhood) {
                 listItem = listItem + `<span class="liNeighborhoods">Neighborhood: ${responseJson.entries[i].neighborhood}</span>`;
@@ -37,12 +37,9 @@ function displayResults(responseJson) {
             listItem = listItem + `<span class="liDescription">${responseJson.entries[i].short_description}</span>`;
 
             $('#results-list').append(
-                `<li>${listItem}</li>`
+                `<li data-name="${responseJson.entries[i].name}">${listItem}</li>`
             )
         };
-
-        //display the results section  
-
 
     } else {
         $('#results-list').append(
@@ -116,46 +113,93 @@ function watchForm() {
 
 $(watchForm);
 
-var map;
-var service;
-var infowindow;
+
+let map;
+let service;
+let infowindow;
+let markers = [];
 
 function initialize() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 39.952583, lng: -75.165222},
-    zoom: 13
-    
-  });
-
-  infowindow = new google.maps.InfoWindow();
-
-  var request = {
-    location: map.getCenter(),
-    radius: '500',
-    query: 'Blackbird',
-    fields: ['name', 'geometry', 'formatted_address', 'permanently_closed'],
-  };
-
-  service = new google.maps.places.PlacesService(map);
-  service.textSearch(request, callback);
-}
-
-// Checks that the PlacesServiceStatus is OK, and adds a marker
-// using the place ID and location from the PlacesService.
-function callback(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    var marker = new google.maps.Marker({
-      map: map,
-      place: {
-        placeId: results[0].place_id,
-        location: results[0].geometry.location
-      }
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 39.952583,
+            lng: -75.165222
+        },
+        zoom: 13
     });
-    google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent('<div><strong>' + results[0].name + '</strong>' + '<br>' + results[0].formatted_address + '</div>');
-   infowindow.open(map, this);
-  });
-  google.maps.event.addDomListener(window, 'load', initialize);
-  }
-}
 
+
+    infowindow = new google.maps.InfoWindow();
+
+    // Checks that the PlacesServiceStatus is OK, and adds a marker
+    // using the place ID and location from the PlacesService.
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            let marker = new google.maps.Marker({
+                map: map,
+                place: {
+                    placeId: results[0].place_id,
+                    location: results[0].geometry.location
+                }
+            });
+            markers.push(marker);
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent('<div><strong>' + results[0].name + '</strong>' + '<br>' + results[0].formatted_address + '</div>');
+                infowindow.open(map, this);
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+        return map;
+    }
+
+    $('body').on('click', 'li', function () {
+        addMarker($(this).data('name'));
+    })
+
+    $("#clearMarkers").click(function () {
+        clearMarkers();
+    })
+
+    $("#showMarkers").click(function () {
+        showMarkers();
+    })
+
+    $("#deleteMarkers").click(function () {
+        deleteMarkers();
+    })
+
+    const addMarker = (location) => {
+        let request = {
+            location: map.getCenter(),
+            radius: '500',
+            query: location,
+            fields: ['name', 'geometry', 'formatted_address', 'permanently_closed'],
+        };
+
+        let service = new google.maps.places.PlacesService(map);
+        service.textSearch(request, callback);
+    }
+
+    function setMapOnAll(map) {
+        for (let i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    // Removes the markers from the map, but keeps them in the array.
+    function clearMarkers() {
+        setMapOnAll(null);
+    }
+
+    // Shows any markers currently in the array.
+    function showMarkers() {
+        setMapOnAll(map);
+    }
+
+    // Deletes all markers in the array by removing references to them.
+    function deleteMarkers() {
+        clearMarkers();
+        markers = [];
+    }
+}

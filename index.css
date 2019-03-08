@@ -1,36 +1,42 @@
 * {
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   height: 100;
   margin: 0;
   padding: 0;
 }
-  body {
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-  }
 
-  input, label {
-    display: block;
+body {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+input,
+label {
+  display: block;
 }
 
 input {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
-select, input {
-    width: 300px;
+select,
+input {
+  width: 300px;
 }
 
 .searchCat {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
+
 .mapContainer {
   height: 400px;
   width: 600px;
   margin: 0 auto;
+  margin-bottom: 100px;
 }
 
 #map {
@@ -39,15 +45,20 @@ select, input {
 }
 
 .hidden {
-    display: none;
-  }
+  display: none;
+}
 
 #results-list {
   width: 400px;
   margin: 0 auto;
 }
 
-.liRestaurantName, .liVeglev, .liNeighborhood, .liAddress, .liWebsite, .liDescription {
+.liRestaurantName,
+.liVeglev,
+.liNeighborhood,
+.liAddress,
+.liWebsite,
+.liDescription {
   display: block;
 }
 
@@ -69,8 +80,16 @@ li {
   list-style: none;
 }
 
+#results {
+  margin-top: 100;
+}
 
-
-/* .searchAdd {
-      display: none;
-  } */
+#floating-panel {
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto', 'sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
