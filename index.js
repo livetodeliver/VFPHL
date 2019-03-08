@@ -90,7 +90,6 @@ function getRestaurants() {
     fetch(url, {
             headers: {
                 'User-Agent': 'Vegan-Friendly PHL App v1.0',
-                'Allowed': origin,
             }
         })
         .then(response => {
