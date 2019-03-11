@@ -1,5 +1,20 @@
 'use strict';
 
+let coll = document.getElementsByClassName("collapsible");
+let i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    let content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
 const searchURL_vegguide = 'https://www.vegguide.org/search/';
 
 
@@ -11,7 +26,7 @@ function formatQueryParams(params) {
 
 function displayResults(responseJson) {
     // if there are previous results, remove them
-    console.log(responseJson);
+    console.log(responseJson, status);
     $('#results-list').empty();
     // iterate through the items array
     if (responseJson.entry_count !== 0) {
@@ -48,8 +63,13 @@ function displayResults(responseJson) {
     }
 
     $('#results').removeClass('hidden');
-
+    
+    $('html, body').animate({
+        scrollTop: ($('#results').offset().top)
+    });
 };
+
+
 
 function getRestaurants() {
     const params = {};
@@ -89,7 +109,7 @@ function getRestaurants() {
 
     fetch(url, {
             headers: {
-                'User-Agent': 'Vegan-Friendly PHL App v1.0',
+                //'User-Agent': 'Vegan-Friendly PHL App v1.0',
             }
         })
         .then(response => {
@@ -103,6 +123,8 @@ function getRestaurants() {
             $('#js-error-message').text(`Something went wrong: ${err.message}`);
         });
 }
+//let element = document.getElementById("results-list");
+
 
 function watchForm() {
     $('form').submit(event => {
@@ -125,7 +147,7 @@ function initialize() {
             lat: 39.952583,
             lng: -75.165222
         },
-        zoom: 13
+        zoom: 12
     });
 
 
@@ -137,6 +159,7 @@ function initialize() {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             let marker = new google.maps.Marker({
                 map: map,
+                location: map.center,
                 place: {
                     placeId: results[0].place_id,
                     location: results[0].geometry.location
@@ -147,6 +170,8 @@ function initialize() {
                 infowindow.setContent('<div><strong>' + results[0].name + '</strong>' + '<br>' + results[0].formatted_address + '</div>');
                 infowindow.open(map, this);
             });
+        } else { 
+            window.alert('Location Not Found');
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
@@ -171,15 +196,19 @@ function initialize() {
 
     const addMarker = (location) => {
         let request = {
-            location: map.getCenter(),
-            radius: '500',
+            location: {
+                lat: 39.952583,
+                lng: -75.165222
+            },
+            radius: '24000',
             query: location,
             fields: ['name', 'geometry', 'formatted_address', 'permanently_closed'],
         };
-
+        console.log(map.center);
         let service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
     }
+  
 
     function setMapOnAll(map) {
         for (let i = 0; i < markers.length; i++) {
@@ -203,3 +232,4 @@ function initialize() {
         markers = [];
     }
 }
+

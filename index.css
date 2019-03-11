@@ -2,21 +2,77 @@
   box-sizing: border-box;
 }
 
-html,
 body {
-  height: 100;
   margin: 0;
   padding: 0;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
+}
+
+header {
+  line-height: 10px;
   text-align: center;
 }
 
-input,
-label {
+.fixedTopDisplay {
+  width: 100%;
+}
+#anchor {
+  height: 0;
   display: block;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 10px 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  font-size: 16px;
+}
+
+.js-address, #js-neighborhoods, #js-veg-level {
+  font-size: 16px;
+}
+
+#results {
+  text-align: center;
+}
+
+.resultsColumn {
+  margin-top: 100px;
+}
+
+.submit {
+  font-size: 20px;
+  padding: 18px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  outline: none;
+  border: none;
+}
+
+.active, .submit:hover {
+  color: black;
+  background-color: white;
 }
 
 input {
@@ -28,15 +84,34 @@ input {
   width: 300px;
 }
 
-.searchCat {
+.searchCat1 > label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.searchCat2 > label {
+  display: inline;
+  font-size: 16px;
+}
+
+#js-food-types, #js-attributes {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.search {
+  margin-bottom: 20px;
+}
+
+#mainSearch {
   margin-bottom: 20px;
 }
 
 .mapContainer {
   height: 400px;
-  width: 600px;
+  width: 100%;
   margin: 0 auto;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 #map {
@@ -46,6 +121,9 @@ input {
 
 .hidden {
   display: none;
+}
+#floating-panel {
+  margin-bottom: 50px;
 }
 
 #results-list {
@@ -78,10 +156,6 @@ input {
 li {
   margin-bottom: 10px;
   list-style: none;
-}
-
-#results {
-  margin-top: 100;
 }
 
 #floating-panel {
