@@ -36,20 +36,25 @@ function displayResults(responseJson) {
             let listItem = "";
 
             listItem = `
-                <span class="liRestaurantName">${responseJson.entries[i].name}</span>
-                <span class="liVeglev">Veg-Friendliness: ${responseJson.entries[i].veg_level_description}</span>`;
+                <span class="liRestaurantName">${responseJson.entries[i].name}</span>`;
+
+            if (responseJson.entries[i].website) {
+                    listItem = listItem + `<span class="liWebsite"><a href='${responseJson.entries[i].website}'><img src="link.png" alt="Website link icon"></a><span>`;
+            }
+    
+                listItem = listItem + `<span class="liVeglev">Veg-Friendliness: ${responseJson.entries[i].veg_level_description}</span>`;
 
             if (responseJson.entries[i].neighborhood) {
                 listItem = listItem + `<span class="liNeighborhoods">Neighborhood: ${responseJson.entries[i].neighborhood}</span>`;
             }
 
-            listItem = listItem + `<span class="liAddress">${responseJson.entries[i].address1}</span>`;
+            listItem = listItem + `<span class="liAddress">${responseJson.entries[i].address1}</span>
+            <span class="liDescription">Description: ${responseJson.entries[i].short_description}</span>`;
 
-            if (responseJson.entries[i].website) {
-                listItem = listItem + `<span class="liWebsite"><a href='${responseJson.entries[i].website}'>${responseJson.entries[i].website}</a><span>`;
+
+            if (responseJson.entries[i].tags) {
+                listItem = listItem + `<span class="liTags">Additional Features: ${responseJson.entries[i].tags}</span>`;
             }
-
-            listItem = listItem + `<span class="liDescription">${responseJson.entries[i].short_description}</span>`;
 
             $('#results-list').append(
                 `<li data-name="${responseJson.entries[i].name}">${listItem}</li>`
@@ -63,10 +68,11 @@ function displayResults(responseJson) {
     }
 
     $('#results').removeClass('hidden');
-    
+
     $('html, body').animate({
         scrollTop: ($('#results').offset().top)
     });
+
 };
 
 
@@ -103,7 +109,7 @@ function getRestaurants() {
     const queryString = formatQueryParams(params)
     let address = $('.js-address').val() + '+Philadelphia,+PA';
     let location = 'by-address/' + address;
-    const url = searchURL_vegguide + location + '/filter/veg_level=' + vegLevel + ';category_id=1;' + queryString;
+    const url = searchURL_vegguide + location + '/filter/unit=mile;distance=2;veg_level=' + vegLevel + ';category_id=1;' + queryString;
 
     console.log(url);
 
@@ -123,7 +129,6 @@ function getRestaurants() {
             $('#js-error-message').text(`Something went wrong: ${err.message}`);
         });
 }
-//let element = document.getElementById("results-list");
 
 
 function watchForm() {

@@ -2,38 +2,37 @@
   box-sizing: border-box;
 }
 
-body {
+ /* body {
   margin: 0;
-  padding: 0;
-}
+  padding: 0; 
+} */
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 header {
-  line-height: 10px;
+  line-height: 1.2;
   text-align: center;
 }
 
-.fixedTopDisplay {
-  width: 100%;
+h1 {
+  font-family: 'Quicksand', sans-serif;
 }
-#anchor {
-  height: 0;
-  display: block;
-}
+
 
 .collapsible {
   background-color: #777;
   color: white;
+  width: 100%;
+  margin: 5px 0;
   cursor: pointer;
   padding: 14px;
-  width: 100%;
   border: none;
-  text-align: left;
+  text-align: center;
   outline: none;
   font-size: 18px;
+  font-family: 'Rubik', sans-serif;
 }
 
 .active, .collapsible:hover {
@@ -41,11 +40,15 @@ header {
 }
 
 .content {
-  padding: 10px 18px;
+  padding: 10px 15%;
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
   font-size: 16px;
+}
+
+input, select {
+  width: 100%;
 }
 
 .js-address, #js-neighborhoods, #js-veg-level {
@@ -58,6 +61,8 @@ header {
 
 .resultsColumn {
   margin-top: 100px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .submit {
@@ -68,20 +73,26 @@ header {
   color: white;
   outline: none;
   border: none;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .active, .submit:hover {
   color: black;
   background-color: white;
+  border: 2px solid black;
 }
 
-input {
+.searchCat, .searchCat1 {
+  width: 100%;
+}
+
+.searchCat2, .searchCat3 {
+  width: 200px;
   margin: 0 auto;
 }
 
-select,
-input {
-  width: 300px;
+select > #js-veg-level {
+  margin: 0 auto;
 }
 
 .searchCat1 > label {
@@ -89,9 +100,8 @@ input {
   display: block;
 }
 
-.searchCat2 > label {
-  display: inline;
-  font-size: 16px;
+#js-wheelchair, #js-accepts-res {
+  width: 20px;
 }
 
 #js-food-types, #js-attributes {
@@ -100,11 +110,7 @@ input {
 }
 
 .search {
-  margin-bottom: 20px;
-}
-
-#mainSearch {
-  margin-bottom: 20px;
+  margin: 0 5px;
 }
 
 .mapContainer {
@@ -122,31 +128,31 @@ input {
 .hidden {
   display: none;
 }
+
 #floating-panel {
   margin-bottom: 50px;
 }
 
 #results-list {
-  width: 400px;
-  margin: 0 auto;
+  padding: 0;
+  display: inline;
 }
 
-.liRestaurantName,
+.resultsColumn {
+  padding-top: 10px;
+}
+
+
 .liVeglev,
 .liNeighborhood,
 .liAddress,
-.liWebsite,
-.liDescription {
+.liDescription, .liTags {
   display: block;
 }
 
 .liRestaurantName {
   font-weight: bold;
   font-size: 20px;
-}
-
-.liDescription {
-  text-align: left;
 }
 
 .liVeglev {
@@ -156,6 +162,20 @@ input {
 li {
   margin-bottom: 10px;
   list-style: none;
+  border: 1px solid green;
+  padding: 10px 35px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+li:hover {
+  background: green;
+  color: white;
+}
+
+img {
+  padding-left: 5px;
+  width: 25px;
 }
 
 #floating-panel {
@@ -166,4 +186,8 @@ li {
   font-family: 'Roboto', 'sans-serif';
   line-height: 30px;
   padding-left: 10px;
+}
+
+#floating-panel > input {
+  width: 200px;
 }

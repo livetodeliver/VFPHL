@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vegan-Friendly PHL - Restaurant Finder</title>
     <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:700|Rubik" rel="stylesheet">
 
 </head>
 
 <body>
-    <div class="fixedTopDisplay">
         <header>
             <h1>Vegan-Friendly PHL</h1>
             <p>The Philadelphia Area Restaurant Finder for Herbivores & Friends</p>
@@ -19,14 +19,14 @@
         <section class="search">
             <div id="mainSearch">
                 <form id="searchOptions">
-                    <button class="collapsible">- Search by Address</button>
+                    <button class="collapsible"><img src="leaf.png" alt="leaf icon"/>Search by Address</button>
                     <div class="content">
                         <label>Enter an address for closest proximity: </label>
                         <input type="text" name="address" class="js-address" placeholder="123 Main St." autocomplete="on">
 
                     </div>
 
-                    <button class="collapsible">- Search by Neighborhood</button>
+                    <button class="collapsible"><img src="leaf.png" alt="leaf icon"/>Search by Neighborhood</button>
                     <div class="content">
                         <label>Select a neighborhood (only if not entering an address):</label>
                         <select name="neighborhoods" id="js-neighborhoods">
@@ -56,19 +56,21 @@
                             <option value="West Philadelphia">West Philadelphia</option>
                         </select>
                     </div>
-                    <button class="collapsible">- Choose Veg-Friendliness Level</button>
+                    <button class="collapsible"><img src="leaf.png" alt="leaf icon"/>Choose Veg-Friendliness Level</button>
                     <div class="content">
-                        <select name="vegness" multiple="" size="5" required id="js-veg-level">
-                            <option value=""> - Select a Veg-Level Option -</option>
+                        <div class="searchCat">
+                            <label>Select an Option</label>
+                        <select name="vegness" multiple="" size="4" required id="js-veg-level">
                             <option value="2">Any</option>
                             <option value="5">100% Vegan</option>
                             <option value="4">100% Vegetarian + Vegan Friendly</option>
                             <option value="2">Non-Veg + Vegan Friendly</option>
                         </select>
                     </div>
+                    </div>
 
 
-                    <button class="collapsible">- Select Filters</button>
+                    <button class="collapsible"><img src="leaf.png" alt="leaf icon"/>Select Filters</button>
                     <div class="content">
                         <div class="searchCat1">
                             <label>Food Types</label>
@@ -102,6 +104,8 @@
                         <div class="searchCat2">
                             <label>Wheelchair Accessible</label>
                             <input name="wheelchairAcc" type="checkbox" id="js-wheelchair">
+                        </div>
+                        <div class="searchCat3">
                             <label>Accepts Reservations</label>
                             <input name="accRess" type="checkbox" name="accRes" id="js-accepts-res">
                         </div>
@@ -118,8 +122,6 @@
     <p id="js-error-message" class="error-message"></p>
 
 
-
-<span id="anchor"></span>
     <section id="results" class="hidden">
         <section class="mapContainer">
             <div id="map">
@@ -132,7 +134,7 @@
         </section>
         <div class="resultsColumn">
             <h2>Search Results:</h2>
-            <p>Click on restaurant name to display a pin on the map for its location.</p>
+            <p>Click on an entry to display a pin on the map for its location.</p>
             <ul id="results-list"></ul>
     </section>
     </div>
