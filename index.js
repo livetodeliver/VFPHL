@@ -237,4 +237,3 @@ function initialize() {
         markers = [];
     }
 }
-
