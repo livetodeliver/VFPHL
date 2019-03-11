@@ -57,7 +57,7 @@ function displayResults(responseJson) {
             }
 
             $('#results-list').append(
-                `<li data-name="${responseJson.entries[i].name}">${listItem}</li>`
+                `<li class="entry" data-name="${responseJson.entries[i].name}">${listItem}</li>`
             )
         };
 
@@ -184,7 +184,9 @@ function initialize() {
     }
 
     $('body').on('click', 'li', function () {
-        addMarker($(this).data('name'));
+            $('html, body').animate({
+            scrollTop: ($('#results').offset().top)});
+            addMarker($(this).data('name'));
     })
 
     $("#clearMarkers").click(function () {
