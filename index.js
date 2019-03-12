@@ -1,28 +1,24 @@
 'use strict';
 
-let coll = document.getElementsByClassName("collapsible");
-let i;
+// Collapsible Search Navigation Menu 
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    let content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
+const coll = document.getElementsByClassName("collapsible");
+
+for (let i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        let content = this.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
 }
 
 const searchURL_vegguide = 'https://www.vegguide.org/search/';
 
 
-function formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-        .map(key => `${key}=${params[key]}`)
-    return queryItems.join(';');
-}
 
 function displayResults(responseJson) {
     // if there are previous results, remove them
@@ -39,10 +35,10 @@ function displayResults(responseJson) {
                 <span class="liRestaurantName">${responseJson.entries[i].name}</span>`;
 
             if (responseJson.entries[i].website) {
-                    listItem = listItem + `<span class="liWebsite"><a href='${responseJson.entries[i].website}'><img src="link.png" alt="Website link icon"></a><span>`;
+                listItem = listItem + `<span class="liWebsite"><a href='${responseJson.entries[i].website}'><img src="link.png" alt="Website link icon"></a><span>`;
             }
-    
-                listItem = listItem + `<span class="liVeglev">Veg-Friendliness: ${responseJson.entries[i].veg_level_description}</span>`;
+
+            listItem = listItem + `<span class="liVeglev">Veg-Friendliness: ${responseJson.entries[i].veg_level_description}</span>`;
 
             if (responseJson.entries[i].neighborhood) {
                 listItem = listItem + `<span class="liNeighborhoods">Neighborhood: ${responseJson.entries[i].neighborhood}</span>`;
@@ -72,10 +68,15 @@ function displayResults(responseJson) {
     $('html, body').animate({
         scrollTop: ($('#results').offset().top)
     });
-
 };
 
+//Formats search parameters and calls API for results
 
+function formatQueryParams(params) {
+    const queryItems = Object.keys(params)
+        .map(key => `${key}=${params[key]}`)
+    return queryItems.join(';');
+}
 
 function getRestaurants() {
     const params = {};
@@ -140,6 +141,7 @@ function watchForm() {
 
 $(watchForm);
 
+// Loads Google Map 
 
 let map;
 let service;
@@ -155,11 +157,12 @@ function initialize() {
         zoom: 12
     });
 
-
     infowindow = new google.maps.InfoWindow();
 
-    // Checks that the PlacesServiceStatus is OK, and adds a marker
-    // using the place ID and location from the PlacesService.
+    // Calls Places API to match results from the VegGuide response
+    // to corresponding Place ID and location.
+    //Checks that the PlacesServiceStatus is OK, and adds a marker.
+
     function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
             let marker = new google.maps.Marker({
@@ -175,7 +178,7 @@ function initialize() {
                 infowindow.setContent('<div><strong>' + results[0].name + '</strong>' + '<br>' + results[0].formatted_address + '</div>');
                 infowindow.open(map, this);
             });
-        } else { 
+        } else {
             window.alert('Location Not Found');
         }
 
@@ -184,9 +187,10 @@ function initialize() {
     }
 
     $('body').on('click', 'li', function () {
-            $('html, body').animate({
-            scrollTop: ($('#results').offset().top)});
-            addMarker($(this).data('name'));
+        $('html, body').animate({
+            scrollTop: ($('#results').offset().top)
+        });
+        addMarker($(this).data('name'));
     })
 
     $("#clearMarkers").click(function () {
@@ -215,7 +219,7 @@ function initialize() {
         let service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
     }
-  
+
 
     function setMapOnAll(map) {
         for (let i = 0; i < markers.length; i++) {

@@ -2,11 +2,6 @@
   box-sizing: border-box;
 }
 
- /* body {
-  margin: 0;
-  padding: 0; 
-} */
-
 body {
   font-family: 'Rubik', sans-serif;
 }
@@ -20,6 +15,11 @@ h1 {
   font-family: 'Quicksand', sans-serif;
 }
 
+/* Search Categories and Filters */
+
+.search {
+  margin: 0 5px;
+}
 
 .collapsible {
   background-color: #777;
@@ -35,8 +35,10 @@ h1 {
   font-family: 'Rubik', sans-serif;
 }
 
-.active, .collapsible:hover {
+.active,
+.collapsible:hover {
   background-color: #555;
+  transition: 0.2s;
 }
 
 .content {
@@ -47,46 +49,35 @@ h1 {
   font-size: 16px;
 }
 
-input, select {
+.content > p {
+  font-size: 14px;
+}
+
+input,
+select {
   width: 100%;
 }
 
-.js-address, #js-neighborhoods, #js-veg-level {
+.js-address,
+#js-neighborhoods,
+#js-veg-level,
+#js-food-types,
+#js-attributes {
   font-size: 16px;
 }
 
-#results {
-  text-align: center;
+#js-food-types,
+#js-attributes {
+  margin-bottom: 20px;
 }
 
-.resultsColumn {
-  margin-top: 100px;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-.submit {
-  font-size: 20px;
-  padding: 18px;
-  width: 100%;
-  background-color: black;
-  color: white;
-  outline: none;
-  border: none;
-  font-family: 'Quicksand', sans-serif;
-}
-
-.active, .submit:hover {
-  color: black;
-  background-color: white;
-  border: 2px solid black;
-}
-
-.searchCat, .searchCat1 {
+.searchCat,
+.searchCat1 {
   width: 100%;
 }
 
-.searchCat2, .searchCat3 {
+.searchCat2,
+.searchCat3 {
   width: 200px;
   margin: 0 auto;
 }
@@ -100,18 +91,31 @@ select > #js-veg-level {
   display: block;
 }
 
-#js-wheelchair, #js-accepts-res {
+#js-wheelchair,
+#js-accepts-res {
   width: 20px;
 }
 
-#js-food-types, #js-attributes {
-  margin-bottom: 20px;
-  font-size: 16px;
+.submit {
+  font-size: 20px;
+  padding: 18px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  outline: none;
+  border: 2px solid transparent;
+  font-family: 'Quicksand', sans-serif;
 }
 
-.search {
-  margin: 0 5px;
+.active,
+.submit:hover {
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+  transition: 0.3s;
 }
+
+/* Results Section */
 
 .mapContainer {
   height: 400px;
@@ -125,38 +129,43 @@ select > #js-veg-level {
   width: 100%;
 }
 
+#floating-panel {
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto', 'sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+  margin-bottom: 50px;
+}
+
+#floating-panel > input {
+  width: 200px;
+}
+
 .hidden {
   display: none;
 }
 
-#floating-panel {
-  margin-bottom: 50px;
+#results {
+  text-align: center;
+}
+
+.resultsColumn {
+  margin-top: 100px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 10px;
+}
+
+.resultsColumn > p > span {
+  font-size: 12px;
 }
 
 #results-list {
   padding: 0;
   display: inline;
-}
-
-.resultsColumn {
-  padding-top: 10px;
-}
-
-
-.liVeglev,
-.liNeighborhood,
-.liAddress,
-.liDescription, .liTags {
-  display: block;
-}
-
-.liRestaurantName {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.liVeglev {
-  font-style: italic;
 }
 
 li {
@@ -171,23 +180,29 @@ li {
 li:hover {
   background: green;
   color: white;
+  transition: 0.3s;
 }
+
+.liVeglev,
+.liNeighborhood,
+.liAddress,
+.liDescription,
+.liTags {
+  display: block;
+}
+
+.liRestaurantName {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.liVeglev {
+  font-style: italic;
+}
+
+/* For Link and Leaf Icons */
 
 img {
   padding-left: 5px;
   width: 25px;
-}
-
-#floating-panel {
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto', 'sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-}
-
-#floating-panel > input {
-  width: 200px;
 }
