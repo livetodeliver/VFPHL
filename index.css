@@ -58,6 +58,10 @@ select {
   width: 100%;
 }
 
+#js-neighbhorhoods  {
+  border: 1px solid;
+}
+
 .js-address,
 #js-neighborhoods,
 #js-veg-level,
