@@ -56,9 +56,10 @@ h1 {
 input,
 select {
   width: 100%;
+  border: 1px solid;
 }
 
-#js-neighbhorhoods  {
+#js-neighbhorhoods {
   border: 1px solid;
 }
 

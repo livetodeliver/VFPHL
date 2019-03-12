@@ -65,9 +65,7 @@ function displayResults(responseJson) {
 
     $('#results').removeClass('hidden');
 
-    $('html, body').animate({
-        scrollTop: ($('#results').offset().top)
-    });
+
 };
 
 //Formats search parameters and calls API for results
@@ -114,7 +112,7 @@ function getRestaurants() {
 
     console.log(url);
 
-    fetch(url, {
+    return fetch(url, {
             headers: {
                 //'User-Agent': 'Vegan-Friendly PHL App v1.0',
             }
@@ -126,20 +124,21 @@ function getRestaurants() {
             throw new Error(response.statusText);
         })
         .then(responseJson => displayResults(responseJson))
+        .then(x => {
+            $('html, body').animate({
+                scrollTop: ($('#results').offset().top)
+            });
+            console.log('something');
+        })
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`);
         });
 }
 
-
-function watchForm() {
-    $('form').submit(event => {
-        event.preventDefault();
-        getRestaurants();
-    });
-}
-
-$(watchForm);
+$('form').submit(event => {
+    event.preventDefault();
+    getRestaurants();
+});
 
 // Loads Google Map 
 
