@@ -137,7 +137,7 @@ function getRestaurants() {
 
 $('form').submit(event => {
     event.preventDefault();
-    getRestaurants();
+    getRestaurants();  
 });
 
 // Loads Google Map 
